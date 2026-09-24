@@ -1,0 +1,218 @@
+/* ================= 2. PPT设计者 专属展示页 ================= */
+        #ppt-portfolio-page {
+            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 9999;
+            height: 100dvh;
+            --drag-bar-size: 45px;
+            opacity: 0; pointer-events: none; transition: opacity 0.5s ease;
+            background-color: #0b0914;
+            display: block; overflow-y: auto; overflow-x: hidden; -webkit-overflow-scrolling: touch;
+        }
+        #ppt-portfolio-page.active { opacity: 1; pointer-events: auto; }
+
+        .btn-close-ppt {
+            position: fixed; top: calc(env(safe-area-inset-top, 0px) + 57px); left: calc(env(safe-area-inset-left, 0px) + 57px);
+            background: rgba(10, 10, 10, 0.8); color: #f6d365; border: 1px solid #ff0844;
+            padding: 10px 20px; font-family: monospace; font-size: 0.95rem;
+            cursor: pointer; transition: all 0.3s; text-transform: uppercase; z-index: 10;
+            backdrop-filter: blur(5px);
+        }
+        .btn-close-ppt:hover { background: rgba(255, 8, 68, 0.2); box-shadow: 0 0 20px rgba(255, 8, 68, 0.6); color: #ffffff; letter-spacing: 1px; }
+
+        .ppt-aurora-bg {
+            position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
+            width: 100vw; height: 100vh; pointer-events: none; z-index: 1;
+            background: radial-gradient(circle at 20% 50%, rgba(255, 8, 68, 0.15), transparent 60%), radial-gradient(circle at 80% 30%, rgba(0, 242, 254, 0.15), transparent 60%), radial-gradient(circle at 50% 80%, rgba(246, 211, 101, 0.12), transparent 60%);
+            filter: blur(80px); animation: auroraFlow 8s infinite alternate linear;
+        }
+        @keyframes auroraFlow { 0% { transform: translate(-50%, -50%) scale(1) rotate(0deg); } 100% { transform: translate(-50%, -50%) scale(1.1) rotate(5deg); } }
+
+        .ppt-hero-section {
+            height: 100vh; width: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center;
+            position: relative; z-index: 2; overflow: hidden;
+        }
+
+        .ink-text-container { position: relative; text-align: center; margin-bottom: 3rem; opacity: 0; transform: translateY(40px); }
+        #ppt-portfolio-page.active .ink-text-container { transition: opacity 1s cubic-bezier(0.2, 1, 0.3, 1) 0.3s, transform 1s cubic-bezier(0.2, 1, 0.3, 1) 0.3s; opacity: 1; transform: translateY(0); }
+
+        .ppt-top-en { font-family: 'Impact', 'Arial Black', sans-serif; color: rgba(255, 255, 255, 0.4); font-size: 1.1rem; letter-spacing: 8px; margin-bottom: 0.5rem; text-transform: uppercase; text-shadow: 0 0 10px rgba(255,255,255,0.2); font-style: italic; }
+
+        .ppt-ink-text {
+            font-family: 'Impact', 'Arial Black', sans-serif; font-style: italic;
+            font-size: 4.5rem; font-weight: 900; letter-spacing: 2px; margin: 0; position: relative; z-index: 3;
+            background: linear-gradient(270deg, #ff0844, #ffb199, #00f2fe, #4facfe, #f6d365, #ff0844); background-size: 400% 400%;
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; animation: colorfulFlow 4s ease infinite;
+            filter: drop-shadow(0 10px 20px rgba(0,0,0,0.5));
+        }
+        @media (min-width: 768px) { .ppt-ink-text { font-size: 6.5rem; letter-spacing: 6px; } }
+
+        @keyframes colorfulFlow { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+
+        .glass-rain-layer { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 99; pointer-events: none; overflow: hidden; opacity: 0; }
+        #ppt-portfolio-page.active .glass-rain-layer { opacity: 1; transition: opacity 1s ease 0.5s; }
+
+        .ink-drop {
+            position: absolute; top: -10vh; border-radius: 50px;
+            background: linear-gradient(to bottom, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.4) 100%);
+            backdrop-filter: blur(3px) brightness(1.1); -webkit-backdrop-filter: blur(3px) brightness(1.1);
+        }
+
+        .drop-1 { left: 18%; width: 12px; height: 30px; border-bottom: 3px solid rgba(255, 8, 68, 0.7); box-shadow: 0 10px 20px rgba(255, 8, 68, 0.4), inset 0 -4px 8px rgba(255, 8, 68, 0.6); animation: glassSlide 5.5s infinite linear 0.2s; }
+        .drop-2 { left: 35%; width: 8px; height: 22px; border-bottom: 2px solid rgba(0, 242, 254, 0.7); box-shadow: 0 8px 15px rgba(0, 242, 254, 0.4), inset 0 -3px 6px rgba(0, 242, 254, 0.6); animation: glassSlide 3s infinite linear 1.5s; }
+        .drop-3 { left: 55%; width: 15px; height: 35px; border-bottom: 3px solid rgba(246, 211, 101, 0.7); box-shadow: 0 12px 25px rgba(246, 211, 101, 0.4), inset 0 -5px 10px rgba(246, 211, 101, 0.6); animation: glassSlide 7s infinite linear 0.8s; }
+        .drop-4 { left: 72%; width: 10px; height: 25px; border-bottom: 2px solid rgba(255, 177, 153, 0.7); box-shadow: 0 10px 18px rgba(255, 177, 153, 0.4), inset 0 -4px 8px rgba(255, 177, 153, 0.6); animation: glassSlide 4.5s infinite linear 2.2s; }
+        .drop-5 { left: 88%; width: 7px; height: 18px; border-bottom: 2px solid rgba(79, 172, 254, 0.7); box-shadow: 0 8px 12px rgba(79, 172, 254, 0.4), inset 0 -3px 6px rgba(79, 172, 254, 0.6); animation: glassSlide 2.5s infinite linear 0.5s; }
+        .drop-6 { left: 25%; width: 14px; height: 32px; border-bottom: 3px solid rgba(255, 106, 0, 0.7); box-shadow: 0 12px 22px rgba(255, 106, 0, 0.4), inset 0 -5px 10px rgba(255, 106, 0, 0.6); animation: glassSlide 6.5s infinite linear 2.7s; }
+        .drop-7 { left: 82%; width: 9px; height: 24px; border-bottom: 2px solid rgba(161, 140, 209, 0.7); box-shadow: 0 9px 16px rgba(161, 140, 209, 0.4), inset 0 -4px 8px rgba(161, 140, 209, 0.6); animation: glassSlide 3.8s infinite linear 1.1s; }
+
+        @keyframes glassSlide {
+            0%   { transform: translateY(-5vh) scale(1, 1); opacity: 0; }
+            10%  { transform: translateY(10vh) scale(0.9, 1.2); opacity: 0.8; }
+            30%  { transform: translateY(40vh) scale(0.7, 1.8); opacity: 0.9; }
+            35%  { transform: translateY(45vh) scale(1.3, 0.7); opacity: 0.95; }
+            45%  { transform: translateY(48vh) scale(1.0, 1.0); opacity: 0.95; }
+            70%  { transform: translateY(90vh) scale(0.5, 2.8); opacity: 0.8; }
+            90%  { transform: translateY(115vh) scale(0.4, 3.5); opacity: 0; }
+            100% { transform: translateY(120vh) scale(0.4, 3.5); opacity: 0; }
+        }
+
+        .ppt-tags-wrapper { display: flex; flex-direction: column; gap: 1rem; align-items: center; opacity: 0; transform: translateY(20px); }
+        @media (min-width: 768px) { .ppt-tags-wrapper { flex-direction: row; gap: 2rem; } }
+        #ppt-portfolio-page.active .ppt-tags-wrapper { transition: opacity 1s ease 0.6s, transform 1s cubic-bezier(0.2, 1, 0.3, 1) 0.6s; opacity: 1; transform: translateY(0); }
+
+        .ppt-tag-card {
+            background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 255, 255, 0.08); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+            padding: 1.2rem 2rem; border-radius: 12px; color: #ffffff; font-size: 1rem; font-weight: 500; letter-spacing: 1px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2); transition: transform 0.3s ease, border-color 0.3s ease; position: relative; overflow: hidden; text-align: center;
+        }
+        .ppt-tag-card::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 2px; background: linear-gradient(90deg, transparent, #00f2fe, #ff0844, transparent); opacity: 0.8; }
+        .ppt-tag-card:hover { transform: translateY(-5px); border-color: rgba(255,255,255,0.2); }
+
+        .ppt-scroll-hint { margin-top: 3rem; display: flex; flex-direction: column; align-items: center; cursor: pointer; transition: opacity 0.3s ease, transform 0.3s ease; position: relative; z-index: 10; }
+        .ppt-scroll-hint:hover { transform: translateY(5px); }
+        .ppt-scroll-arrow { width: 24px; height: 24px; border-bottom: 4px solid #ff0844; border-right: 4px solid #ff0844; transform: rotate(45deg); animation: arrowBlink 1.5s infinite ease-in-out; }
+        @keyframes arrowBlink { 0% { opacity: 0.2; transform: rotate(45deg) translate(-5px, -5px); } 50% { opacity: 1; transform: rotate(45deg) translate(0, 0); } 100% { opacity: 0.2; transform: rotate(45deg) translate(5px, 5px); } }
+
+        /* ================= 核心修改：真正的 2D 错落无缝无限画布 ================= */
+        .ppt-canvas-section {
+            width: 100%; height: 100vh; padding: 0; margin: 0; position: relative; z-index: 3; overflow: hidden;
+            height: 100dvh;
+            display: flex; flex-direction: column; align-items: center; justify-content: center; background: transparent;
+            /* 阻止拖拽变蓝高亮 */
+            user-select: none !important;
+            -webkit-user-select: none !important;
+            -moz-user-select: none !important;
+        }
+
+        .ppt-canvas-title { text-align: center; position: absolute; z-index: 20; pointer-events: auto; display: flex; flex-direction: column; align-items: center; transition: opacity 0.8s ease, transform 0.8s ease; }
+        .ppt-canvas-title.fade-out { opacity: 0 !important; transform: translateY(-40px) scale(0.95) !important; pointer-events: none; }
+
+        .ppt-canvas-title h2 { font-size: 3rem; font-weight: 900; color: #ffffff; letter-spacing: 2px; font-family: 'Impact', sans-serif; text-transform: uppercase; text-shadow: 0 5px 15px rgba(0,0,0,0.5); font-style: italic; margin: 0 0 0.5rem 0; }
+        .canvas-subtitle-en { font-family: 'Impact', sans-serif; font-size: 1.2rem; color: #ffffff; letter-spacing: 4px; text-transform: uppercase; text-shadow: 0 2px 10px rgba(0,0,0,0.5); }
+        .canvas-subtitle-en span { color: #ff0844; }
+
+        .dedicated-canvas-wrapper {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; visibility: hidden;
+            overflow: hidden; cursor: grab; touch-action: none;
+            transition: opacity 1.2s cubic-bezier(0.2, 0.8, 0.2, 1) 0.2s, visibility 1.2s 0.2s;
+            /* 阻止拖拽变蓝高亮 */
+            user-select: none !important;
+            -webkit-user-select: none !important;
+            -moz-user-select: none !important;
+            -webkit-user-drag: none !important;
+        }
+        .dedicated-canvas-wrapper ::selection { background: transparent !important; }
+        .dedicated-canvas-wrapper.active { opacity: 1; visibility: visible; }
+        .dedicated-canvas-wrapper:active { cursor: grabbing; }
+
+        .canvas-viewport { position: absolute; inset: 0; overflow: hidden; }
+
+        /* 核心修复：完全由 CSS Transform 驱动退远缩放，完美同步 0.4s */
+        .infinite-canvas-container {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            /* 退远缩放的 CSS 过渡，与 DRAG 边框同步 */
+            transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.4s ease;
+            transform-origin: center;
+            transform: scale(1);
+            user-select: none !important;
+        }
+
+        /* 滑动交互时的退远缩小效果 */
+        .dedicated-canvas-wrapper.interacting .infinite-canvas-container {
+            transform: scale(0.75) !important;
+        }
+
+        /* 移除 transform 动画防止乱飞，依靠 JS 实时无缝定位 */
+        .infinite-item {
+            position: absolute; border-radius: 12px; background: #1a1a1a; box-shadow: 0 15px 35px rgba(0,0,0,0.3); overflow: hidden;
+            cursor: pointer; transition: filter 0.3s ease, box-shadow 0.2s ease; will-change: transform;
+            user-select: none !important; -webkit-user-drag: none !important;
+        }
+
+        .infinite-item img {
+            width: 100%; height: 100%; object-fit: contain; display: block; pointer-events: none;
+            transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+            user-select: none !important; -webkit-user-drag: none !important;
+        }
+        .infinite-item:hover { filter: brightness(1.15); box-shadow: 0 25px 50px rgba(0,0,0,0.5); z-index: 10 !important; }
+
+        .infinite-item::before { content: attr(data-img); position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: rgba(255, 255, 255, 0.15); font-family: monospace; font-size: 1.2rem; font-weight: bold; z-index: -1; pointer-events: none; user-select: none;}
+
+        /* ================= 核心修改：力量感深红警示边框与顺时针动画 ================= */
+        .drag-border-overlay {
+            position: absolute; inset: env(safe-area-inset-top, 0px) env(safe-area-inset-right, 0px) env(safe-area-inset-bottom, 0px) env(safe-area-inset-left, 0px);
+            pointer-events: none; z-index: 100; opacity: 0; transition: opacity 0.4s ease;
+            /* 防止边框文字被拖拽选中变蓝 */
+            user-select: none !important;
+            -webkit-user-select: none !important;
+        }
+        .drag-border-overlay ::selection { background: transparent !important; }
+        .drag-border-overlay.active { opacity: 1; }
+        .drag-bar {
+            position: absolute; background: #ff0844; color: #fff; font-family: 'Impact', sans-serif;
+            font-size: 1.5rem; letter-spacing: 4px; /* 字体加大 */
+            display: flex; align-items: center; overflow: hidden; white-space: nowrap; box-shadow: 0 0 20px rgba(255,8,68,0.5);
+        }
+        .drag-bar.top { top: 0; left: 0; width: 100%; height: var(--drag-bar-size); }
+        .drag-bar.bottom { bottom: 0; left: 0; width: 100%; height: var(--drag-bar-size); }
+        .drag-bar.left, .drag-bar.right { top: 0; width: var(--drag-bar-size); height: 100%; writing-mode: vertical-rl; }
+        .drag-bar.left { left: 0; transform: rotate(180deg); }
+        .drag-bar.right { right: 0; }
+        .drag-bar.left .left-anim { animation-name: marqueeUp; }
+        .drag-bar.right .right-anim { animation-name: marqueeDown; }
+        .drag-bar.left .marquee-content, .drag-bar.right .marquee-content { min-width: 0; min-height: 100%; }
+        .drag-bar.left .drag-text-item, .drag-bar.right .drag-text-item { padding: 15px 0; }
+        .drag-bar.left svg, .drag-bar.right svg { margin-left: 0; margin-top: 10px; transform: rotate(90deg); }
+
+        /* 纯文本对齐包裹单元 */
+        .drag-text-item { display: inline-flex; align-items: center; padding: 0 15px; }
+        /* 独立的大号描边箭头 */
+        .drag-text-item svg { width: 1.2em; height: 1.2em; margin-left: 10px; stroke-width: 4px; pointer-events: none; }
+
+        /* 2倍速双轨无缝循环走马灯 */
+        .marquee-content { display: flex; flex-shrink: 0; align-items: center; justify-content: space-around; min-width: 100%; }
+        /* 所有方向通过正确的旋转和right-anim/left-anim达到完美的顺时针流转 */
+        .left-anim { animation: marqueeLeft 4s linear infinite; }
+        .right-anim { animation: marqueeRight 4s linear infinite; }
+        @keyframes marqueeLeft { 0% { transform: translateX(0); } 100% { transform: translateX(-100%); } }
+        @keyframes marqueeRight { 0% { transform: translateX(-100%); } 100% { transform: translateX(0); } }
+        @keyframes marqueeUp { 0% { transform: translateY(0); } 100% { transform: translateY(-100%); } }
+        @keyframes marqueeDown { 0% { transform: translateY(-100%); } 100% { transform: translateY(0); } }
+
+        .ppt-lightbox {
+            position: fixed; inset: 0; z-index: 10001; display: none;
+            align-items: center; justify-content: center; background: rgba(0,0,0,0.94);
+            padding: calc(env(safe-area-inset-top, 0px) + 64px) calc(env(safe-area-inset-right, 0px) + 16px) calc(env(safe-area-inset-bottom, 0px) + 20px) calc(env(safe-area-inset-left, 0px) + 16px);
+        }
+        .ppt-lightbox.active { display: flex; }
+        #ppt-lightbox-img { width: auto; height: auto; max-width: min(100%, 1400px); max-height: 100%; object-fit: contain; }
+        .lightbox-close {
+            position: absolute; top: calc(env(safe-area-inset-top, 0px) + 10px); right: calc(env(safe-area-inset-right, 0px) + 12px);
+            width: 44px; height: 44px; border: 1px solid #777; border-radius: 50%; color: #fff; background: #151515; font-size: 24px; cursor: pointer;
+        }
+        @media (max-width: 767px), (max-width: 1024px) and (pointer: coarse) {
+            #ppt-portfolio-page { --drag-bar-size: 26px; }
+            .canvas-viewport { inset: calc(env(safe-area-inset-top, 0px) + 88px) calc(env(safe-area-inset-right, 0px) + 32px) calc(env(safe-area-inset-bottom, 0px) + 36px) calc(env(safe-area-inset-left, 0px) + 32px); }
+            .btn-close-ppt { top: calc(env(safe-area-inset-top, 0px) + 34px); left: calc(env(safe-area-inset-left, 0px) + 32px); min-height: 44px; padding: 8px 14px; font-size: 0.85rem; }
+            .drag-bar { font-size: 1rem; letter-spacing: 2px; }
+            .infinite-item { border-radius: 8px; }
+        }

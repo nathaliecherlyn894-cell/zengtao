@@ -1,0 +1,191 @@
+/* ================= 3. 自媒体创作者 专属展示页 ================= */
+        #media-portfolio-page {
+            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 9999;
+            opacity: 0; pointer-events: none; transition: opacity 0.5s ease;
+            background-color: #030303;
+            display: block; overflow-y: auto; overflow-x: hidden; -webkit-overflow-scrolling: touch;
+        }
+        #media-portfolio-page.active { opacity: 1; pointer-events: auto; }
+
+        .media-vignette {
+            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+            background: radial-gradient(circle at center, transparent 40%, rgba(0,0,0,0.95) 100%);
+            pointer-events: none; z-index: 1;
+        }
+
+        .btn-close-media {
+            position: fixed; top: 2rem; left: 2rem;
+            background: rgba(10, 10, 10, 0.8); color: #00f2fe; border: 1px solid #00f2fe;
+            padding: 10px 20px; font-family: monospace; font-size: 0.95rem;
+            cursor: pointer; transition: all 0.3s; text-transform: uppercase; z-index: 10;
+            backdrop-filter: blur(5px);
+        }
+        .btn-close-media:hover {
+            background: rgba(0, 242, 254, 0.2); box-shadow: 0 0 20px rgba(0, 242, 254, 0.6);
+            color: #ffffff; letter-spacing: 1px;
+        }
+
+        .media-hero-section {
+            /* 手机端修正：高度固定，防止缩放后留白 */
+            height: 100vh; width: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center;
+            position: relative; z-index: 2; overflow: hidden;
+        }
+
+        .media-stage {
+            position: relative; width: 100%; max-width: 1200px; height: 60vh;
+            display: flex; align-items: center; justify-content: center;
+        }
+
+        .projector-rig {
+            position: absolute;
+            left: -160px;
+            top: 50%;
+            transform: translateY(-69.6%);
+            width: 320px; height: auto;
+            z-index: 4; pointer-events: none;
+        }
+
+        .cinema-projector-svg { width: 100%; height: auto; filter: drop-shadow(15px 15px 20px rgba(0,0,0,0.9)); }
+
+        .reel-spin { animation: spinReel 2s linear infinite; }
+        @keyframes spinReel { 100% { transform: rotate(360deg); } }
+
+        .projector-beam {
+            position: absolute;
+            top: 69.6%; left: 90%;
+            width: 120vw; height: 350px;
+            background: linear-gradient(90deg, rgba(255,255,255,0.85) 0%, rgba(253, 224, 71, 0.15) 40%, transparent 100%);
+            clip-path: polygon(0 40%, 100% 0%, 100% 100%, 0 60%);
+            transform-origin: 0% 50%;
+            transform: translateY(-50%) rotate(0deg);
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        .media-text-wrapper {
+            position: relative;
+            margin-left: 10vw;
+            display: flex; flex-direction: column; align-items: center;
+            z-index: 3; text-align: center;
+        }
+
+        .media-top-en {
+            font-family: 'Impact', 'Arial Black', sans-serif;
+            font-size: 1.2rem; letter-spacing: 10px;
+            margin-bottom: 0.5rem; text-transform: uppercase; font-style: italic;
+            color: #00f2fe;
+            text-shadow: 0 0 10px rgba(0, 242, 254, 0.5);
+        }
+
+        .media-ink-text {
+            font-family: 'Impact', 'Arial Black', sans-serif; font-style: italic;
+            font-size: 5rem; font-weight: 900; letter-spacing: 6px; margin: 0;
+            background-image:
+                repeating-linear-gradient(0deg, transparent 0, transparent 3px, rgba(0,0,0,0.4) 3px, rgba(0,0,0,0.4) 6px),
+                repeating-linear-gradient(to bottom, #ffffff 0%, #999999 10%, #ffffff 20%, #444444 30%, #ffffff 40%, #777777 50%, #ffffff 60%);
+            background-size: 100% 100%, 100% 200%;
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            animation: signalWave 1.5s infinite linear;
+        }
+        @media (min-width: 768px) { .media-ink-text { font-size: 6.5rem; letter-spacing: 8px; } }
+
+        @keyframes signalWave {
+            0% { background-position: 0 0, 0 0%; }
+            100% { background-position: 0 0, 0 200%; }
+        }
+
+        .projector-broken .projector-beam, .projector-broken .lens-flare-svg { animation: beamBroken 0.8s infinite; }
+        .projector-broken ~ .media-text-wrapper .media-ink-text-wrapper { animation: textBroken 0.8s infinite; }
+
+        .projector-stable .projector-beam, .projector-stable .lens-flare-svg { animation: beamStable 5s infinite; }
+        .projector-stable ~ .media-text-wrapper .media-ink-text-wrapper { animation: textStable 5s infinite; }
+
+        @keyframes beamBroken {
+            0%, 10% { opacity: 0; filter: blur(2px); }
+            11%, 15% { opacity: 0.9; filter: blur(8px); }
+            16%, 60% { opacity: 0; filter: blur(2px); }
+            61%, 65% { opacity: 1; filter: blur(10px); }
+            66%, 100% { opacity: 0; filter: blur(2px); }
+        }
+        @keyframes beamStable {
+            0%, 45% { opacity: 0.9; filter: blur(8px); }
+            46%, 48% { opacity: 0.1; filter: blur(2px); }
+            49%, 85% { opacity: 0.95; filter: blur(8px); }
+            86%, 88% { opacity: 0.3; filter: blur(4px); }
+            89%, 100% { opacity: 0.9; filter: blur(8px); }
+        }
+
+        @keyframes textBroken {
+            0%, 10% { filter: brightness(0.2) drop-shadow(0 0 0px transparent); opacity: 0.4; }
+            11%, 15% { filter: brightness(1.5) drop-shadow(0 0 15px rgba(255,255,255,0.8)); opacity: 1; }
+            16%, 60% { filter: brightness(0.2) drop-shadow(0 0 0px transparent); opacity: 0.4; }
+            61%, 65% { filter: brightness(2) drop-shadow(0 0 25px rgba(253,224,71,0.6)); opacity: 1; }
+            66%, 100% { filter: brightness(0.2) drop-shadow(0 0 0px transparent); opacity: 0.4; }
+        }
+        @keyframes textStable {
+            0%, 45% { filter: brightness(1.2) drop-shadow(0 0 15px rgba(253,224,71,0.3)); opacity: 1; }
+            46%, 48% { filter: brightness(0.3) drop-shadow(0 0 0px transparent); opacity: 0.6; }
+            49%, 85% { filter: brightness(1.2) drop-shadow(0 0 15px rgba(253,224,71,0.3)); opacity: 1; }
+            86%, 88% { filter: brightness(0.5) drop-shadow(0 0 5px rgba(253,224,71,0.1)); opacity: 0.8; }
+            89%, 100% { filter: brightness(1.2) drop-shadow(0 0 15px rgba(253,224,71,0.3)); opacity: 1; }
+        }
+
+        .media-content-section {
+            width: 100%; max-width: 1000px; margin: 0 auto;
+            padding: 2rem 2rem 10rem 2rem; position: relative; z-index: 3;
+            display: flex; flex-direction: column; align-items: center;
+        }
+
+        .media-douyin-button {
+            display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
+            min-height: 44px; padding: 0.75rem 1.5rem; margin-bottom: 2rem;
+            border: 1px solid #00f2fe; border-radius: 999px;
+            background: #00f2fe; color: #111; font-weight: 800;
+        }
+        .media-douyin-button:hover { background: #fff; border-color: #fff; color: #111; }
+        .media-douyin-button:focus-visible, .media-account-link:focus-visible { outline: 3px solid #fff; outline-offset: 4px; }
+
+        .media-account-grid { display: flex; flex-direction: column; gap: 2rem; width: 100%; margin-bottom: 4rem; }
+        @media (min-width: 768px) { .media-account-grid { flex-direction: row; justify-content: center; gap: 4rem; } }
+
+        .media-account-card {
+            flex: 1; max-width: 420px; width: 100%;
+            background: rgba(10, 10, 10, 0.6); border-radius: 16px; padding: 1.5rem;
+            border: 1px solid rgba(0, 242, 254, 0.2);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.6), inset 0 0 20px rgba(0, 242, 254, 0.05);
+            transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1), border-color 0.4s ease;
+        }
+        .media-account-card:hover {
+            transform: translateY(-10px); border-color: rgba(0, 242, 254, 0.6);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.8), 0 0 30px rgba(0, 242, 254, 0.15);
+        }
+
+        .media-account-img-wrapper {
+            position: relative; width: 100%; aspect-ratio: 9/20;
+            background: #1a1a1a; border-radius: 10px; overflow: hidden; display: flex; align-items: center; justify-content: center;
+        }
+        .media-account-link { border: 0; }
+        .media-account-img-wrapper img { width: 100%; height: 100%; object-fit: contain; z-index: 2; position: relative; }
+        .media-account-img-wrapper::before {
+            content: attr(data-img); position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+            color: rgba(255,255,255,0.15); font-family: monospace; font-size: 1.2rem; font-weight: bold; z-index: 1;
+        }
+
+        .media-account-text { text-align: center; }
+        .media-account-text h2 {
+            font-size: 2.2rem; font-family: 'Impact', sans-serif; font-style: italic; color: #ffffff; letter-spacing: 2px; margin-bottom: 0.8rem; text-shadow: 0 5px 15px rgba(0,0,0,0.8);
+        }
+        .media-account-en-deco { font-family: 'Impact', sans-serif; font-size: 1.1rem; color: rgba(255,255,255,0.4); letter-spacing: 6px; text-transform: uppercase; text-shadow: 0 2px 10px rgba(0,0,0,0.5); }
+        .media-account-en-deco span { color: #00f2fe; }
+
+        .media-fade-in { opacity: 0; transform: translateY(50px); transition: opacity 1s cubic-bezier(0.2, 1, 0.3, 1), transform 1s cubic-bezier(0.2, 1, 0.3, 1); will-change: opacity, transform; }
+        .media-fade-in.visible { opacity: 1; transform: translateY(0); }
+
+        @media (max-width: 768px) {
+            .media-stage { position: static; display: flex; align-items: center; justify-content: center; height: 100vh; }
+            .projector-rig { position: absolute; left: -120px; top: 50%; transform: translateY(-70%); width: 240px; }
+            .media-text-wrapper { margin-left: 20vw; position: relative; z-index: 5; width: 100%; }
+            .media-ink-text { font-size: 3.5rem; letter-spacing: 2px; }
+            .media-top-en { font-size: 0.8rem; letter-spacing: 4px; }
+            .media-account-text h2 { font-size: 1.6rem; }
+        }
