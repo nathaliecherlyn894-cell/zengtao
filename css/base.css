@@ -41,38 +41,6 @@
         .btn-print:hover { background: var(--accent-color); transform: scale(1.05); }
         .print-text { display: none; }
 
-        /* 全站音乐：位于详情页之上、视频与大图弹窗之下。 */
-        .music-toggle {
-            position: fixed; top: calc(env(safe-area-inset-top, 0px) + 14px); right: calc(env(safe-area-inset-right, 0px) + 14px);
-            z-index: 10000; min-height: 44px; padding: 8px 14px; border: 1px solid rgba(127, 127, 127, 0.3);
-            border-radius: 999px; background: rgba(255, 255, 255, 0.94); color: #262626;
-            font-family: inherit; font-size: 12px; font-weight: 600; line-height: 1.4;
-            display: inline-flex; align-items: center; gap: 6px; cursor: pointer;
-            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08); backdrop-filter: blur(10px);
-        }
-        .music-toggle[hidden] { display: none; }
-        .music-toggle:hover { border-color: var(--accent-color); }
-        .music-toggle:focus-visible { outline: 3px solid var(--accent-color); outline-offset: 3px; }
-        .music-toggle[data-state="playing"] > span:first-child { color: #c2410c; }
-        .music-toggle[data-section="ppt"] {
-            top: calc(env(safe-area-inset-top, 0px) + 57px); right: calc(env(safe-area-inset-right, 0px) + 57px);
-        }
-        .music-credits { margin-top: 1rem; font-size: 0.75rem; color: var(--text-secondary); }
-        .music-credits summary { cursor: pointer; }
-        .music-credits p { margin-top: 0.5rem; }
-        @media (max-width: 1160px) {
-            .btn-print { right: 130px; }
-        }
-        @media (max-width: 767px) {
-            .btn-print { top: 0; }
-        }
-        @media (max-width: 768px) {
-            .music-toggle[data-section="ppt"] {
-                top: calc(env(safe-area-inset-top, 0px) + 34px); right: calc(env(safe-area-inset-right, 0px) + 32px);
-            }
-        }
-        @media print { .music-toggle, .music-credits { display: none !important; } }
-
         /* ================= 首屏 Hero 区域 ================= */
         .hero { padding: 3rem 1rem 2rem; position: relative; z-index: 1; }
         .hero-tags { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 1.5rem; font-family: monospace; font-size: 0.75rem; letter-spacing: 0.5px; }
