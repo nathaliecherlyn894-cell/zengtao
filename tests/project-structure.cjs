@@ -18,7 +18,8 @@ const expectedScripts = [
     'js/home.js',
     'js/ai-portfolio.js',
     'js/media-portfolio.js',
-    'js/ppt-wall.js'
+    'js/ppt-wall.js',
+    'js/music.js'
 ];
 
 test('index.html 只负责页面结构并按顺序引用样式和脚本', () => {

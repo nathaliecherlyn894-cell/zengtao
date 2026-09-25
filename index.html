@@ -12,6 +12,9 @@
 </head>
 <body>
 
+<button id="music-toggle" class="music-toggle no-print" type="button" aria-label="开启音乐" aria-pressed="false" data-state="off" hidden><span aria-hidden="true">♫</span> <span class="music-label">开启音乐</span></button>
+<audio id="site-music" loop preload="none" hidden></audio>
+
 <!-- SVG Icons Definition for Drag Borders -->
 <svg style="display:none;">
     <symbol id="icon-arrow-r" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
@@ -248,6 +251,10 @@
         <p>如需进一步沟通，欢迎随时联系：</p>
         <p style="margin-top: 0.5rem; font-weight: 500; color: var(--text-primary);">TEL: 18189800504 &nbsp;|&nbsp; WeChat: xzt18189800504 &nbsp;|&nbsp; E-mail: xingzzm_2023@qq.com</p>
         <p style="margin-top: 2rem; opacity: 0.5;">© 2026 邢增涛. Designed with Gemini.</p>
+        <details class="music-credits">
+            <summary>音乐鸣谢</summary>
+            <p>Carefree · Bit Quest · Funk Game Loop · Wallpaper<br>作者：<a href="https://incompetech.com/" target="_blank" rel="noopener noreferrer">Kevin MacLeod (incompetech.com)</a><br>依据 <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener noreferrer">CC BY 4.0</a> 使用；本站版本已压缩并调整响度。</p>
+        </details>
     </footer>
 
 </div>
@@ -568,6 +575,7 @@
 <script src="js/ai-portfolio.js" defer></script>
 <script src="js/media-portfolio.js" defer></script>
 <script src="js/ppt-wall.js" defer></script>
+<script src="js/music.js" defer></script>
 
 </body>
 </html>
