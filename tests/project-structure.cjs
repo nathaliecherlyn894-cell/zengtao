@@ -25,9 +25,11 @@ test('index.html 只负责页面结构并按顺序引用样式和脚本', () => 
     assert.doesNotMatch(index, /<style[\s>]/i);
     assert.doesNotMatch(index, /<script>(?!\s*<\/script>)/i);
 
+    const styleRefs = [...index.matchAll(/<link\b[^>]*rel="stylesheet"[^>]*href="([^"]+)"/g)]
+        .map(match => match[1].split('?')[0]);
     let previous = -1;
     for (const file of expectedStyles) {
-        const position = index.indexOf(`href="${file}"`);
+        const position = styleRefs.indexOf(file);
         assert.ok(position > previous, `${file} 存在且顺序正确`);
         previous = position;
     }

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="theme-color" content="#080d14">
+    <title>无尽书架 · 邢增涛的图书馆</title>
+    <link rel="icon" href="assets/avatar/头像.jpg">
+    <link rel="stylesheet" href="css/library.css">
+    <script type="importmap">{"imports":{"three":"./assets/library/vendor/three.module.js"}}</script>
+</head>
+<body>
+    <main id="library" aria-label="宇航员在无限书架中漂浮的互动空间">
+        <canvas id="space" aria-label="长按加速穿行，松开恢复漂浮；也可按住空格键" tabindex="0"></canvas>
+        <div class="vignette" aria-hidden="true"></div>
+        <header class="topbar">
+            <a class="back" href="index.html" aria-label="返回主页"><span>↖</span> 返回主页</a>
+            <div class="wordmark">ZENGTAO <span>/</span> LIBRARY</div>
+        </header>
+        <button id="music-toggle" type="button" aria-pressed="false" aria-label="播放配乐" title="播放配乐"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l11-2v13M9 9l11-2"/><ellipse cx="6" cy="18" rx="3" ry="2"/><ellipse cx="17" cy="16" rx="3" ry="2"/></svg></button>
+        <audio id="library-audio" src="assets/library/cornfield-chase-trimmed.m4a" preload="auto" autoplay loop></audio>
+        <div id="loading" role="status"><span class="loading-line"></span><p>正在点亮书架…</p></div>
+        <div id="error" hidden role="alert"><p>暂时无法打开这个空间。</p><p>请使用支持 3D 的浏览器，并检查网络后重试。</p><button type="button" onclick="location.reload()">重新进入</button></div>
+        <button id="hold" type="button" aria-label="按住加速，松开减速；也可按住空格键">长按 · 加速</button>
+        <a class="credits" href="assets/library/credits.html" target="_blank" rel="noopener">素材致谢</a>
+        <noscript><div class="no-script">请启用 JavaScript 后进入图书馆。<a href="index.html">返回主页</a></div></noscript>
+    </main>
+    <script type="module" src="js/library.js?v=20261005-slow-pose"></script>
+    <script src="js/library-music.js?v=20261004-volume" defer></script>
+</body>
+</html>

@@ -148,6 +148,25 @@
         .dp-item:hover .dp-desc { color: #444444; }
         .dp-item:hover .dp-date { color: #444444; }
 
+        /* ================= 我的书架入口 ================= */
+        .library-entry-section { margin-bottom: 6rem; }
+        .library-entry {
+            position: relative; display: flex; align-items: flex-end; min-height: 360px;
+            padding: 3rem; overflow: hidden; border: 1px solid #26303b;
+            border-radius: var(--radius-lg); background: #060a10; color: #f5f7fa;
+        }
+        .library-entry-cover { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 65% 50%; }
+        .library-entry::after {
+            content: ''; position: absolute; inset: 0;
+            background: linear-gradient(90deg, rgba(4, 8, 14, 0.92), rgba(4, 8, 14, 0.5) 43%, transparent 75%), linear-gradient(0deg, rgba(4, 8, 14, 0.7), transparent 70%);
+        }
+        .library-entry-copy { position: relative; z-index: 1; }
+        .library-entry-copy h2 { font-size: 2.8rem; font-weight: 900; letter-spacing: -1px; line-height: 1.2; }
+        .library-entry-copy p { margin-top: 0.8rem; color: #d0d7e0; font-size: 1rem; }
+        .library-entry-link { display: inline-block; margin-top: 1.8rem; font-size: 0.9rem; font-weight: 600; }
+        .library-entry:hover { color: #ffffff; border-color: #8495a9; }
+        .library-entry:focus-visible { outline: 3px solid #668fb8; outline-offset: 5px; }
+
         /* ================= 鼠标悬浮图片弹窗特效 (减少1/4) ================= */
         .cursor-follower {
             position: fixed; top: 0; left: 0;
@@ -262,6 +281,12 @@
         .delay-200 { transition-delay: 200ms; }
 
         @media (max-width: 768px) {
+            .library-entry { min-height: 400px; padding: 1.8rem; }
+            .library-entry-cover { object-position: 62% 50%; }
+            .library-entry::after { background: linear-gradient(0deg, rgba(4, 8, 14, 0.97), rgba(4, 8, 14, 0.7) 30%, transparent 75%); }
+            .library-entry-copy h2 { font-size: 2.2rem; }
+            .library-entry-copy p { font-size: 0.95rem; }
+
             .academic-row { flex-direction: column; align-items: flex-start; padding: 1.2rem 0; }
             .academic-value { text-align: left; font-size: 1.15rem; }
             .academic-title { font-size: 2.2rem; }
